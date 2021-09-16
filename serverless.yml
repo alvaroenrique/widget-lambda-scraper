@@ -5,7 +5,7 @@ provider:
 
 functions:
   scraper:
-    handler: handler.main
+    handler: handler.run
     memorySize: 1536
     timeout: 20
     events:

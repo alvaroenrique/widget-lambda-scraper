@@ -1,10 +1,12 @@
 const chromium = require("chrome-aws-lambda");
 
-exports.main = async (event) => {
+exports.run = async (event) => {
+  let browser = null;
+
   const { url } = event.queryStringParameters || {};
 
   try {
-    const browser = await chromium.puppeteer.launch({
+    browser = await chromium.puppeteer.launch({
       args: chromium.args,
       defaultViewport: chromium.defaultViewport,
       executablePath: await chromium.executablePath,
@@ -38,7 +40,7 @@ exports.main = async (event) => {
       statusCode: 200,
       body: result,
     };
-  } catch (error) {
+  } catch (err) {
     await browser.close();
     return {
       statusCode: 500,
